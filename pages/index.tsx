@@ -1,12 +1,32 @@
-import type { NextPage } from 'next'
-import Welcome from '../components/Welcome'
+import type { GetServerSideProps, GetStaticProps, NextPage } from 'next'
+import Wordle from '../components/Wordle'
 
-const Home: NextPage = () => {
+interface _WordleProps {
+	word: string
+}
+
+export const getServerSideProps: GetServerSideProps<
+	_WordleProps
+> = async () => {
+	const response = await fetch('https://daily-word-api.netlify.app')
+	const { word } = await response.json()
+
+	return {
+		props: {
+			word
+		}
+	}
+}
+
+const Home: NextPage<_WordleProps> = ({ word }) => {
 	return (
 		<main role='main'>
-			<Welcome />
+			<Wordle word={word} />
 		</main>
 	)
 }
 
 export default Home
+
+// Language: typescript
+// Path: pages/index.tsx
