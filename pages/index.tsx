@@ -1,8 +1,8 @@
-import type { GetServerSideProps, GetStaticProps, NextPage } from 'next'
+import type { GetServerSideProps, NextPage } from 'next'
 import Wordle from '../components/Wordle'
 
 interface _WordleProps {
-	word: string
+	solution: string
 }
 
 export const getServerSideProps: GetServerSideProps<
@@ -13,15 +13,15 @@ export const getServerSideProps: GetServerSideProps<
 
 	return {
 		props: {
-			word
+			solution: word
 		}
 	}
 }
 
-const Home: NextPage<_WordleProps> = ({ word }) => {
+const Home: NextPage<_WordleProps> = ({ solution }) => {
 	return (
 		<main role='main'>
-			<Wordle word={word} />
+			<Wordle solution={solution} />
 		</main>
 	)
 }
