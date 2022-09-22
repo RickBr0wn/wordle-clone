@@ -1,11 +1,7 @@
 import { useState } from 'react'
 
-interface _UseWordleProps {
-	solution: string
-}
-
-const useWordle = ({ solution }: _UseWordleProps) => {
-	console.log('The solution is: ', solution)
+const useWordle = (solution: string) => {
+	// console.log('The solution is: ', solution)
 	const [guess, setGuess] = useState<string>('')
 	const [currentGuess, setCurrentGuess] = useState<string>('')
 	const [guesses, setGuesses] = useState<string[]>([])
@@ -26,7 +22,17 @@ const useWordle = ({ solution }: _UseWordleProps) => {
 
 	// handle the keyup event & track the current guess
 	// detect when a user hits the enter key
-	const handleKeyUp = (e: React.KeyboardEvent) => {}
+	const handleKeyUp = ({ key }: { key: string }) => {
+		if (key === 'Backspace') {
+			return setCurrentGuess(prev => prev.slice(0, -1))
+		}
+
+		if (/^[A-Za-z]$/.test(key)) {
+			if (currentGuess.length < 5) {
+				setCurrentGuess(prev => prev + key)
+			}
+		}
+	}
 
 	return {
 		currentGuess,
