@@ -1,39 +1,19 @@
-import { Box, Flex, Text } from '@chakra-ui/react'
-import { _Guess } from './Wordle'
-import WordleRow from './WordleRow'
-
-interface _WordleGridProps {
-	currentGuess: string
-	guesses: _Guess[][]
-	turn: number
-}
+import { _WordleGridProps } from '../types'
+import { WordleRow } from './WordleRow'
 
 export default function WordleGrid({
 	currentGuess,
 	guesses,
 	turn
-}: _WordleGridProps) {
+}: _WordleGridProps): JSX.Element {
 	return (
-		<Flex flexDir={'column'} w={'100vw'}>
-			<Flex align={'center'} flexDir={'column'}>
-				{guesses &&
-					guesses.map((guess, index) =>
-						guess ? (
-							<WordleRow key={index} guess={guess} />
-						) : (
-							<WordleRow
-								key={index}
-								guess={[
-									{ key: '', color: 'transparent' },
-									{ key: '', color: 'transparent' },
-									{ key: '', color: 'transparent' },
-									{ key: '', color: 'transparent' },
-									{ key: '', color: 'transparent' }
-								]}
-							/>
-						)
-					)}
-			</Flex>
-		</Flex>
+		<div>
+			{guesses.map((guess, index) => {
+				if (turn === index) {
+					return <WordleRow key={index} currentGuess={currentGuess} />
+				}
+				return <WordleRow key={index} guess={guess} />
+			})}
+		</div>
 	)
 }

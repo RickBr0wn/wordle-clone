@@ -1,10 +1,10 @@
 import { useState } from 'react'
-import { _Guess } from '../components/Wordle'
+import { _Guess } from '../types'
 
 const useWordle = (solution: string) => {
 	const [guess, setGuess] = useState<string>('')
 	const [currentGuess, setCurrentGuess] = useState<string>('')
-	const [guesses, setGuesses] = useState([...Array(6)])
+	const [guesses, setGuesses] = useState<_Guess[][]>([...Array(6)])
 	const [isCorrect, setIsCorrect] = useState<boolean>(false)
 	const [history, setHistory] = useState<string[]>([])
 	const [turn, setTurn] = useState<number>(0)
@@ -40,7 +40,7 @@ const useWordle = (solution: string) => {
 				letter.color !== 'green' &&
 				letter.color !== 'yellow'
 			) {
-				formattedGuess[index].color = 'red'
+				formattedGuess[index].color = 'gray'
 			}
 		})
 
