@@ -2,11 +2,6 @@ import { useEffect } from 'react'
 import useWordle from '../hooks/useWordle'
 import WordleGrid from './WordleGrid'
 
-export interface _Guess {
-	key: string
-	color: string
-}
-
 export default function Wordle({ solution }: { solution: string }) {
 	const { currentGuess, guesses, isCorrect, turn, handleKeyUp } =
 		useWordle(solution)
@@ -18,9 +13,11 @@ export default function Wordle({ solution }: { solution: string }) {
 		}
 	}, [handleKeyUp])
 
-	// useEffect(() => {
-	// console.log(guesses, turn, isCorrect)
-	// }, [guesses, turn, isCorrect])
+	useEffect(() => {
+		console.log('guesses: ', guesses)
+		console.log('turn: ', turn)
+		console.log('isCorrect: ', isCorrect)
+	}, [guesses, turn, isCorrect])
 
 	return (
 		<div className='wordle'>

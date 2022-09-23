@@ -1,33 +1,56 @@
-import { Flex, Text, useColorMode } from '@chakra-ui/react'
-import { _Guess } from './Wordle'
+import { Flex } from '@chakra-ui/react'
+import { _WordleRowProps } from '../types'
+import WordleLetter from './WordleLetter'
 
-interface _WordleRowProps {
-	guess: _Guess[]
-}
+export function WordleRow({ guess, currentGuess }: _WordleRowProps) {
+	if (guess) {
+		return (
+			<Flex
+				textAlign={'center'}
+				display={'flex'}
+				justifyContent={'center'}
+				gap={2}
+			>
+				{guess.map((letter, index) => {
+					return <WordleLetter key={index} letter={letter} />
+				})}
+			</Flex>
+		)
+	}
 
-export default function WordleRow({ guess }: _WordleRowProps) {
-	const { colorMode } = useColorMode()
+	if (currentGuess) {
+		const currentGuessLetters = currentGuess.split('')
+		return (
+			<Flex
+				textAlign={'center'}
+				display={'flex'}
+				justifyContent={'center'}
+				gap={2}
+			>
+				{currentGuessLetters.map((letter, index) => {
+					return (
+						<WordleLetter key={index} letter={{ key: letter, color: '' }} />
+					)
+				})}
+				{[...Array(5 - currentGuessLetters.length)].map((_, index) => {
+					return <WordleLetter key={index} letter={{ key: '', color: '' }} />
+				})}
+			</Flex>
+		)
+	}
 
 	return (
-		<Flex justify={'center'} align={'center'} flexDir={'row'} gap={1}>
-			{guess &&
-				guess.map((letter: _Guess, index: number) => (
-					<Flex
-						bg={letter.color}
-						color={'#333'}
-						key={index}
-						h={'60px'}
-						w={'60px'}
-						mb={2}
-						justify={'center'}
-						align={'center'}
-						border={`1px solid ${colorMode === 'light' ? '#333' : '#fff'}`}
-					>
-						<Text fontSize={'2.5em'} fontWeight={'black'}>
-							{letter.key.toUpperCase()}
-						</Text>
-					</Flex>
-				))}
+		<Flex
+			textAlign={'center'}
+			display={'flex'}
+			justifyContent={'center'}
+			gap={2}
+		>
+			<WordleLetter letter={{ key: '', color: '' }} />
+			<WordleLetter letter={{ key: '', color: '' }} />
+			<WordleLetter letter={{ key: '', color: '' }} />
+			<WordleLetter letter={{ key: '', color: '' }} />
+			<WordleLetter letter={{ key: '', color: '' }} />
 		</Flex>
 	)
 }
