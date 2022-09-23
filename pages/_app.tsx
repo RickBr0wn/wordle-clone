@@ -5,6 +5,7 @@ import Layout from '../components/Layout'
 import Head from 'next/head'
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
+	const app = ''
 	return (
 		<>
 			<Head>
