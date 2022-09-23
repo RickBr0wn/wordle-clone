@@ -13,10 +13,8 @@ export default function WordleGrid({
 	guesses,
 	turn
 }: _WordleGridProps) {
-	console.log(guesses)
 	return (
 		<Flex flexDir={'column'} w={'100vw'}>
-			<h1>wordle grid</h1>
 			<Flex align={'center'} flexDir={'column'}>
 				{guesses &&
 					guesses.map((guess, index) =>

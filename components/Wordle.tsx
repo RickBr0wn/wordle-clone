@@ -18,9 +18,9 @@ export default function Wordle({ solution }: { solution: string }) {
 		}
 	}, [handleKeyUp])
 
-	useEffect(() => {
-		console.log(guesses, turn, isCorrect)
-	}, [guesses, turn, isCorrect])
+	// useEffect(() => {
+	// console.log(guesses, turn, isCorrect)
+	// }, [guesses, turn, isCorrect])
 
 	return (
 		<div className='wordle'>
