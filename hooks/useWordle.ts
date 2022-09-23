@@ -4,25 +4,18 @@ import { _Guess } from '../components/Wordle'
 const useWordle = (solution: string) => {
 	const [guess, setGuess] = useState<string>('')
 	const [currentGuess, setCurrentGuess] = useState<string>('')
-	const [guesses, setGuesses] = useState<
-		Array<Array<{ key: string; color: string }>>
-	>([...Array(6)])
+	const [guesses, setGuesses] = useState([...Array(6)])
 	const [isCorrect, setIsCorrect] = useState<boolean>(false)
 	const [history, setHistory] = useState<string[]>([])
-	const [isWrong, setIsWrong] = useState<boolean>(false)
-	const [isComplete, setIsComplete] = useState<boolean>(false)
 	const [turn, setTurn] = useState<number>(0)
 
 	const formatGuess = () => {
 		const solutionArray: Array<string | null> = [...solution]
-		console.log('solutionArray: ', solutionArray)
 		// format a guess into an array of letter objects
 		// eg: { key: 'a', color: 'yellow' }
-		const formattedGuess: Array<_Guess> = [...currentGuess].map(
-			(letter, index) => {
-				return { key: letter, color: 'gray' }
-			}
-		)
+		const formattedGuess: _Guess[] = [...currentGuess].map((letter, index) => {
+			return { key: letter, color: 'gray' }
+		})
 
 		// find the correct letters and change their color to green
 		formattedGuess.forEach((letter, index) => {
@@ -57,7 +50,7 @@ const useWordle = (solution: string) => {
 	// add a new guess to the guess state
 	// update isCorrect if the guess is correct
 	// add one to the turn state
-	const addNewGuess = (formattedGuess: Array<_Guess>) => {
+	const addNewGuess = (formattedGuess: _Guess[]) => {
 		if (currentGuess === solution) {
 			setIsCorrect(true)
 			return
@@ -100,8 +93,6 @@ const useWordle = (solution: string) => {
 			}
 
 			const formattedGuess = formatGuess()
-
-			console.log('formattedGuess: ', formattedGuess)
 
 			addNewGuess(formattedGuess)
 		}
