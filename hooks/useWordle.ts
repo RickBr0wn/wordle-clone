@@ -51,10 +51,9 @@ const useWordle = (solution: string) => {
 	// update isCorrect if the guess is correct
 	// add one to the turn state
 	const addNewGuess = (formattedGuess: _Guess[]) => {
-		if (currentGuess === solution) {
-			setIsCorrect(true)
-			return
-		}
+		// if (currentGuess === solution) {
+		// 	setIsCorrect(true)
+		// }
 
 		setGuesses(prev => {
 			let newGuesses = [...prev]
